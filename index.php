@@ -1,4 +1,7 @@
 <?php
+
+define('POST_TEXT_LENGTH', 300);
+
 $is_auth = rand(0, 1);
 
 $user_name = 'Владимир'; // укажите здесь ваше имя
@@ -15,6 +18,13 @@ $posts = [
         'title' => 'Игра престолов',
         'type' => 'post-text',
         'text' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
+        'user_name' => 'Владик',
+        'avatar' => 'userpic.jpg',
+    ],
+    [
+        'title' => 'Игра престолов',
+        'type' => 'post-text',
+        'text' => 'Могу дождаться начала финального сезона своего любимого сериала! Мы в жизни любим только раз, а после ищем лишь похожих Не могу дождаться начала финального сезона своего любимого сериала!',
         'user_name' => 'Владик',
         'avatar' => 'userpic.jpg',
     ],
@@ -48,6 +58,28 @@ $post_types = [
     'link' => 'post-link',
     'video' => 'post-link',
 ];
+
+function crop_post_text ($text, $length = POST_TEXT_LENGTH) {
+    if (strlen($text) > $length) {
+        $text_as_array = explode(" ", $text);
+        $short_text = '';
+        for ($i = 0; $i < count($text_as_array); $i++ ) {
+            $word = $text_as_array[$i];
+            if (strlen($short_text) + strlen($word) <= $length ) {
+                $short_text = $short_text . $word . ' ';
+            } else {
+                break;
+            }
+        }
+        return '<p>' . trim($short_text) . '...</p>
+            <div class="post-text__more-link-wrapper">
+                <a class="post-text__more-link" href="#">Читать далее</a>
+            </div>
+        ';
+    }
+    return '<p>' . $text . '</p>';
+};
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -299,10 +331,7 @@ $post_types = [
                                 </a>
                             </div>
                         <?php elseif ($post_types['text'] == $post['type']): ?>
-                            <p><?=$post['text']?></p>
-                            <div class="post-text__more-link-wrapper">
-                                <a class="post-text__more-link" href="#">Читать далее</a>
-                            </div>
+                            <?=crop_post_text($post['text'])?>
                         <?php endif;?>
 
                     </div>
