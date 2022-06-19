@@ -178,7 +178,12 @@ $post_types = [
                             </div>
                             <div class="post__info">
                                 <b class="post__author-name"><?=$post['user_name']?></b>
-                                <time class="post__time" datetime="<?=$post['publish_time']?>"><?=date_to_human_readable($post['publish_time'])?></time>
+                                <time
+                                    class="post__time"
+                                    datetime="<?=$post['publish_time']?>"
+                                    title="<?=date_format(date_create($post['publish_time']), 'd.m.Y h:i')?>">
+                                    <?=date_to_human_readable($post['publish_time'])?>
+                                </time>
                             </div>
                         </a>
                     </div>
