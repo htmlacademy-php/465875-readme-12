@@ -262,3 +262,36 @@ function generate_random_date($index)
 
     return $dt;
 }
+
+function date_to_human_readable($date_time) {
+    date_default_timezone_set('Europe/Moscow');
+    // CONST
+    $day_in_week = 7;
+
+    $current_date = date_create('now');
+    $difference_date = date_diff($current_date, date_create($date_time));
+
+    $minutes = date_interval_format($difference_date, '%i');
+    $hours = date_interval_format($difference_date, '%h');
+    $days = date_interval_format($difference_date, '%d');
+    $months = date_interval_format($difference_date, '%m');
+    $weeks = $days / $day_in_week;
+
+    if ($months > 0) {
+        // если до текущего времени прошло больше 5 недель, то формат будет вида «% месяцев назад».
+        return $months . ' ' . get_noun_plural_form($months, 'месяц', 'месяца', 'месяцев') . ' назад';
+    } elseif ($minutes > 0) {
+        // если до текущего времени прошло меньше 60 минут, то формат будет вида «% минут назад»;
+        return $minutes . ' ' . get_noun_plural_form($minutes, 'минута', 'минуты', 'минут') . ' назад';
+    } elseif ($hours > 0) {
+        // если до текущего времени прошло больше 60 минут, но меньше 24 часов, то формат будет вида «% часов назад»;
+        return $hours . ' ' . get_noun_plural_form($hours, 'час', 'часа', 'часов') . ' назад';
+    } elseif ($days > $day_in_week) {
+        // если до текущего времени прошло больше 7 дней, но меньше 5 недель, то формат будет вида «% недель назад»;
+        return $weeks . ' ' . get_noun_plural_form($weeks, 'неделя', 'недели', 'недель') . ' назад';
+    } elseif ($days > 0) {
+        // если до текущего времени прошло больше 24 часов, но меньше 7 дней, то формат будет вида «% дней назад»;
+        return $days . ' ' . get_noun_plural_form($days, 'день', 'дня', 'дней') . ' назад';
+    }
+}
+

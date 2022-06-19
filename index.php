@@ -12,6 +12,7 @@ $posts = [
         'text' => 'Мы в жизни любим <script>alert(123)</script>только раз, а после ищем лишь похожих',
         'user_name' => 'Лариса',
         'avatar' => 'userpic-larisa-small.jpg',
+        'publish_time' => generate_random_date(0),
     ],
     [
         'title' => 'Цитата',
@@ -19,6 +20,7 @@ $posts = [
         'text' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
         'user_name' => 'Лариса',
         'avatar' => 'userpic-larisa-small.jpg',
+        'publish_time' => generate_random_date(1),
     ],
     [
         'title' => 'Игра престолов',
@@ -26,6 +28,7 @@ $posts = [
         'text' => 'Не могу дождаться начала финального сезона своего любимого сериала!',
         'user_name' => 'Владик',
         'avatar' => 'userpic.jpg',
+        'publish_time' => generate_random_date(2),
     ],
     [
         'title' => 'Игра престолов',
@@ -33,6 +36,7 @@ $posts = [
         'text' => 'Могу дождаться начала финального сезона своего любимого сериала! Мы в жизни любим только раз, а после ищем лишь похожих Не могу дождаться начала финального сезона своего любимого сериала!',
         'user_name' => 'Владик',
         'avatar' => 'userpic.jpg',
+        'publish_time' => generate_random_date(3),
     ],
     [
         'title' => 'Наконец, обработал фотки!',
@@ -40,6 +44,7 @@ $posts = [
         'text' => 'rock-medium.jpg',
         'user_name' => 'Виктор',
         'avatar' => 'userpic-mark.jpg',
+        'publish_time' => generate_random_date(4),
     ],
     [
         'title' => 'Моя мечта',
@@ -47,6 +52,7 @@ $posts = [
         'text' => 'coast-medium.jpg',
         'user_name' => 'Лариса',
         'avatar' => 'userpic-larisa-small.jpg',
+        'publish_time' => generate_random_date(5),
     ],
     [
         'title' => 'Лучшие курсы',
@@ -54,6 +60,7 @@ $posts = [
         'text' => 'www.htmlacademy.ru',
         'user_name' => 'Владик',
         'avatar' => 'userpic.jpg',
+        'publish_time' => generate_random_date(6),
     ],
 ];
 
