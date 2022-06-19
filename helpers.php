@@ -262,3 +262,39 @@ function generate_random_date($index)
 
     return $dt;
 }
+
+function date_to_human_readable($date_time) {
+    // CONST
+    $one_unit_time = 60;
+    $hour_in_day = 24;
+    $day_in_week = 7;
+    $week = 5;
+
+    $current_time = new DateTime(date('Y-m-d H:i:s', time()));
+    $publish_time = new DateTime($date_time);
+
+    $seconds_ago = ($current_time->getTimestamp() - $publish_time->getTimestamp());
+    $minutes_ago = floor($seconds_ago / $one_unit_time);
+    $hours_ago = floor($seconds_ago / 3600);
+    $days_ago = floor($seconds_ago / 86400);
+    $weeks_ago = floor($seconds_ago / 604800);
+    $month_ago = $current_time->diff($publish_time) ->format('%m');
+
+    if ($minutes_ago < $one_unit_time) {
+        // если до текущего времени прошло меньше 60 минут, то формат будет вида «% минут назад»;
+        return $minutes_ago . ' ' . get_noun_plural_form($minutes_ago, 'минута', 'минуты', 'минут') . ' назад';
+    } elseif ($minutes_ago > $one_unit_time && $hours_ago < $hour_in_day) {
+        // если до текущего времени прошло больше 60 минут, но меньше 24 часов, то формат будет вида «% часов назад»;
+        return $hours_ago . ' ' . get_noun_plural_form($hours_ago, 'час', 'часа', 'часов') . ' назад';
+    } elseif ($hours_ago > $hour_in_day && $days_ago < $day_in_week) {
+        // если до текущего времени прошло больше 24 часов, но меньше 7 дней, то формат будет вида «% дней назад»;
+        return $days_ago . ' ' . get_noun_plural_form($days_ago, 'день', 'дня', 'дней') . ' назад';
+    } elseif ($days_ago > $day_in_week && $weeks_ago < $week) {
+        // если до текущего времени прошло больше 7 дней, но меньше 5 недель, то формат будет вида «% недель назад»;
+        return $weeks_ago . ' ' . get_noun_plural_form($weeks_ago, 'неделя', 'недели', 'недель') . ' назад';
+    } elseif ($weeks_ago > $week) {
+        // если до текущего времени прошло больше 5 недель, то формат будет вида «% месяцев назад».
+        return $month_ago . ' ' . get_noun_plural_form($month_ago, 'месяц', 'месяца', 'месяцев') . ' назад';
+    }
+}
+
