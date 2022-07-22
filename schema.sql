@@ -1,5 +1,4 @@
-CREATE DATABASE readme
-  DEFAULT CHARACTER SET utf8;
+CREATE DATABASE readme;
 
 use readme;
 
@@ -31,8 +30,8 @@ CREATE TABLE comments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   comment_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   comment_content TEXT NOT NULL,
-  comment_user_id INT,
-  comment_post_id INT
+  comment_user_id INT NOT NULL,
+  comment_post_id INT NOT NULL
 );
 
 CREATE TABLE likes (
